@@ -26,4 +26,6 @@ Tread carefully.
   - a database server to which both connect
 - The database stores its files in `db/storage`, but they're not really designed for you to read! You can delete `db/storage` and then restart your Docker containers to wipe the database though.
 - When starting from scratch, the database container runs the scripts in `db/initial`: I've put a script that creates a "fruits" table and puts some sample data in it
+  - You can design/edit tables in PHPMyAdmin and then use the "Export" tool to turn them into .sql files (to put in the `db/initial` folder) for next time you start from scratch.
 - The code in `src/` is made available via your webserver. `index.php` is the "root" page you sdee at http://localhost:8080/. I'm sure you can work out what the other pages do by trial and error! `src/` is where you'll do most of your work!
+
