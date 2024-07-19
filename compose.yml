@@ -1,0 +1,37 @@
+services:
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - 8080:80
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    volumes:
+      - ./db/storage:/var/lib/mysql
+      - ./db/initial:/docker-entrypoint-initdb.d
+
+  phpmyadmin:
+    depends_on:
+      - mysql
+    image: phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOSTS: mysql
+      PMA_USER: myuser
+      PMA_PASSWORD: mypassword
+
+volumes:
+  mysql_data:
